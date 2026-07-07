@@ -1,0 +1,25 @@
+target/
+*.class
+*.jar
+*.war
+.idea/
+*.iml
+*.iws
+*.ipr
+.settings/
+.project
+.classpath
+bin/
+logs/
+*.log
+.DS_Store
+*.local
+
+# 敏感配置文件（包含密码等，请使用环境变量）
+application-*.yml
+!application.yml
+!application-dev.yml
+
+# IDE
+.idea/
+*.iml
