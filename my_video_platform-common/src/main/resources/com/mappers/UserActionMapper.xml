@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.myvideoplatform.mappers.UserActionMapper">
+<mapper namespace="com.echoplay.mappers.UserActionMapper">
 
     <!-- 结果映射 -->
-    <resultMap id="BaseResultMap" type="com.myvideoplatform.entity.po.UserAction">
+    <resultMap id="BaseResultMap" type="com.echoplay.entity.po.UserAction">
         <id column="id" property="id" jdbcType="BIGINT"/>
         <result column="user_id" property="userId" jdbcType="VARCHAR"/>
         <result column="video_id" property="videoId" jdbcType="VARCHAR"/>
@@ -24,7 +24,7 @@
     </sql>
 
     <!-- 插入用户行为（存在重复键时更新，避免并发插入报错�?-->
-    <insert id="insert" parameterType="com.myvideoplatform.entity.po.UserAction">
+    <insert id="insert" parameterType="com.echoplay.entity.po.UserAction">
         INSERT INTO mvp_user_action (
             user_id, video_id, comment_id, action_type, action_count, last_action_time
         ) VALUES (
@@ -43,7 +43,7 @@
     </update>
 
     <!-- 根据ID更新 -->
-    <update id="updateById" parameterType="com.myvideoplatform.entity.po.UserAction">
+    <update id="updateById" parameterType="com.echoplay.entity.po.UserAction">
         UPDATE mvp_user_action
         <set>
             <if test="userId != null">user_id = #{userId},</if>
@@ -93,7 +93,7 @@
     </select>
 
     <!-- 根据用户、视频和行为类型更新（用于逻辑删除�?-->
-    <update id="updateByUserVideoAction" parameterType="com.myvideoplatform.entity.po.UserAction">
+    <update id="updateByUserVideoAction" parameterType="com.echoplay.entity.po.UserAction">
         UPDATE mvp_user_action
         <set>
             <if test="commentId != null">comment_id = #{commentId},</if>

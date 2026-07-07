@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.myvideoplatform.mappers.MessageMapper">
+<mapper namespace="com.echoplay.mappers.MessageMapper">
 
     <!-- 结果映射 -->
-    <resultMap id="BaseResultMap" type="com.myvideoplatform.entity.po.Message">
+    <resultMap id="BaseResultMap" type="com.echoplay.entity.po.Message">
         <id column="id" property="id" jdbcType="BIGINT"/>
         <result column="message_id" property="messageId" jdbcType="VARCHAR"/>
         <result column="receive_user_id" property="receiveUserId" jdbcType="VARCHAR"/>
@@ -25,7 +25,7 @@
     </sql>
 
     <!-- 插入消息 -->
-    <insert id="insert" parameterType="com.myvideoplatform.entity.po.Message">
+    <insert id="insert" parameterType="com.echoplay.entity.po.Message">
         INSERT INTO mvp_message (
             message_id, receive_user_id, send_user_id, message_type, content, related_id, is_read
         ) VALUES (
@@ -44,7 +44,7 @@
     </update>
 
     <!-- 根据消息ID更新 -->
-    <update id="updateByMessageId" parameterType="com.myvideoplatform.entity.po.Message">
+    <update id="updateByMessageId" parameterType="com.echoplay.entity.po.Message">
         UPDATE mvp_message
         <set>
             <if test="receiveUserId != null">receive_user_id = #{receiveUserId},</if>

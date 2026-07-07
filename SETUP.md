@@ -1,4 +1,4 @@
-# My Video Platform 项目配置与运行指南
+# EchoPlay 项目配置与运行指南
 ## 项目概述
 
 My Video Platform 是一个全栈视频分享平台后端，灵感来源于 Bilibili。项目采用 Spring Boot + MyBatis + MySQL + Redis 技术栈，支持视频分片上传、FFmpeg 异步转码、弹幕系统、用户社交等完整功能。

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.myvideoplatform.mappers.UserInfoMapper">
+<mapper namespace="com.echoplay.mappers.UserInfoMapper">
 
     <!-- 结果映射 -->
-    <resultMap id="BaseResultMap" type="com.myvideoplatform.entity.po.UserInfo">
+    <resultMap id="BaseResultMap" type="com.echoplay.entity.po.UserInfo">
         <id column="user_id" property="userId" jdbcType="VARCHAR"/>
         <result column="nick_name" property="nickName" jdbcType="VARCHAR"/>
         <result column="email" property="email" jdbcType="VARCHAR"/>
@@ -32,7 +32,7 @@
     </sql>
 
     <!-- 插入用户 -->
-    <insert id="insert" parameterType="com.myvideoplatform.entity.po.UserInfo">
+    <insert id="insert" parameterType="com.echoplay.entity.po.UserInfo">
         INSERT INTO mvp_user_info (
             user_id, nick_name, email, password, avatar, sex, birthday, school,
             person_introduction, join_time, last_login_time, last_login_ip,
@@ -55,7 +55,7 @@
     </update>
 
     <!-- 根据用户ID更新 -->
-    <update id="updateByUserId" parameterType="com.myvideoplatform.entity.po.UserInfo">
+    <update id="updateByUserId" parameterType="com.echoplay.entity.po.UserInfo">
         UPDATE mvp_user_info
         <set>
             <if test="nickName != null">nick_name = #{nickName},</if>
@@ -79,7 +79,7 @@
     </update>
 
     <!-- 根据邮箱更新 -->
-    <update id="updateByEmail" parameterType="com.myvideoplatform.entity.po.UserInfo">
+    <update id="updateByEmail" parameterType="com.echoplay.entity.po.UserInfo">
         UPDATE mvp_user_info
         <set>
             <if test="userId != null">user_id = #{userId},</if>
@@ -155,7 +155,7 @@
     </delete>
 
     <!-- 根据昵称更新 -->
-    <update id="updateByNickName" parameterType="com.myvideoplatform.entity.po.UserInfo">
+    <update id="updateByNickName" parameterType="com.echoplay.entity.po.UserInfo">
         UPDATE mvp_user_info
         <set>
             <if test="userId != null">user_id = #{userId},</if>

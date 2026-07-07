@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.myvideoplatform.mappers.PlayHistoryMapper">
+<mapper namespace="com.echoplay.mappers.PlayHistoryMapper">
 
     <!-- 结果映射 -->
-    <resultMap id="BaseResultMap" type="com.myvideoplatform.entity.po.PlayHistory">
+    <resultMap id="BaseResultMap" type="com.echoplay.entity.po.PlayHistory">
         <id column="id" property="id" jdbcType="BIGINT"/>
         <result column="user_id" property="userId" jdbcType="VARCHAR"/>
         <result column="video_id" property="videoId" jdbcType="VARCHAR"/>
@@ -24,7 +24,7 @@
     </sql>
 
     <!-- 插入播放历史 -->
-    <insert id="insert" parameterType="com.myvideoplatform.entity.po.PlayHistory">
+    <insert id="insert" parameterType="com.echoplay.entity.po.PlayHistory">
         INSERT INTO mvp_play_history (
             user_id, video_id, file_id, progress, duration, last_play_time
         ) VALUES (
@@ -43,7 +43,7 @@
     </update>
 
     <!-- 根据用户ID和视频ID更新 -->
-    <update id="updateByUserIdVideoId" parameterType="com.myvideoplatform.entity.po.PlayHistory">
+    <update id="updateByUserIdVideoId" parameterType="com.echoplay.entity.po.PlayHistory">
         UPDATE mvp_play_history
         <set>
             <if test="fileId != null">file_id = #{fileId},</if>

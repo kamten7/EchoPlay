@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.myvideoplatform.mappers.OperationLogMapper">
+<mapper namespace="com.echoplay.mappers.OperationLogMapper">
 
-    <resultMap id="BaseResultMap" type="com.myvideoplatform.entity.po.OperationLog">
+    <resultMap id="BaseResultMap" type="com.echoplay.entity.po.OperationLog">
         <id column="id" property="id" jdbcType="BIGINT"/>
         <result column="oper_id" property="operId" jdbcType="VARCHAR"/>
         <result column="oper_module" property="operModule" jdbcType="VARCHAR"/>
@@ -24,7 +24,7 @@
         oper_user_id, oper_user_name, oper_ip, status, error_msg, create_time
     </sql>
 
-    <insert id="insert" parameterType="com.myvideoplatform.entity.po.OperationLog">
+    <insert id="insert" parameterType="com.echoplay.entity.po.OperationLog">
         INSERT INTO mvp_operation_log (
             oper_id, oper_module, oper_type, oper_desc, request_url, request_params,
             oper_user_id, oper_user_name, oper_ip, status, error_msg

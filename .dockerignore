@@ -1,0 +1,57 @@
+# ============================================
+# Docker 构建忽略文件
+# ============================================
+# 这些文件不会被发送到 Docker daemon，减少构建上下文大小，
+# 防止敏感信息泄露到镜像中
+
+# --- Git 仓库 ---
+.git/
+.gitignore
+.gitattributes
+
+# --- 敏感配置（绝不进入镜像）---
+.env
+.env.*
+!.env.example
+
+# --- IDE ---
+.idea/
+*.iml
+*.iws
+*.ipr
+.vscode/
+.settings/
+.project
+.classpath
+
+# --- OS ---
+.DS_Store
+Thumbs.db
+
+# --- Docker 持久化数据 ---
+docker/mysql/data/
+
+# --- 日志 ---
+logs/
+*.log
+*.log.*
+
+# --- Maven 构建产物（除 jar 包外全部忽略）---
+target/*
+!target/**/*.jar
+
+# --- 文档 ---
+*.md
+
+# --- 临时文件 ---
+*.tmp
+*.temp
+*.swp
+*.bak
+
+# --- 测试视频 / 大文件 ---
+*.mp4
+*.avi
+*.mkv
+*.mov
+*.flv

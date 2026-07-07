@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.myvideoplatform.mappers.UserWatchHistoryMapper">
+<mapper namespace="com.echoplay.mappers.UserWatchHistoryMapper">
 
-    <resultMap id="BaseResultMap" type="com.myvideoplatform.entity.po.UserWatchHistory">
+    <resultMap id="BaseResultMap" type="com.echoplay.entity.po.UserWatchHistory">
         <id column="user_id" property="userId" jdbcType="VARCHAR"/>
         <id column="video_id" property="videoId" jdbcType="VARCHAR"/>
         <result column="watched_at" property="watchedAt" jdbcType="TIMESTAMP"/>

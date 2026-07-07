@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.myvideoplatform.mappers.DanmuMapper">
+<mapper namespace="com.echoplay.mappers.DanmuMapper">
 
     <!-- 结果映射 -->
-    <resultMap id="BaseResultMap" type="com.myvideoplatform.entity.po.Danmu">
+    <resultMap id="BaseResultMap" type="com.echoplay.entity.po.Danmu">
         <id column="id" property="id" jdbcType="BIGINT"/>
         <result column="danmu_id" property="danmuId" jdbcType="VARCHAR"/>
         <result column="video_id" property="videoId" jdbcType="VARCHAR"/>
@@ -27,7 +27,7 @@
     </sql>
 
     <!-- 插入弹幕 -->
-    <insert id="insert" parameterType="com.myvideoplatform.entity.po.Danmu">
+    <insert id="insert" parameterType="com.echoplay.entity.po.Danmu">
         INSERT INTO mvp_danmu (
             danmu_id, video_id, file_id, user_id, content, time_point, mode, color, font_size
         ) VALUES (
@@ -41,7 +41,7 @@
     </delete>
 
     <!-- 根据弹幕ID更新 -->
-    <update id="updateByDanmuId" parameterType="com.myvideoplatform.entity.po.Danmu">
+    <update id="updateByDanmuId" parameterType="com.echoplay.entity.po.Danmu">
         UPDATE mvp_danmu
         <set>
             <if test="videoId != null">video_id = #{videoId},</if>

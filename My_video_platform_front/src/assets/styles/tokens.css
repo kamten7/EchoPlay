@@ -1,0 +1,196 @@
+/* ===== EchoPlay Design Tokens — Deep Blue Theme ===== */
+
+/* ─── Light Theme (Default) ─── */
+:root,
+[data-theme="light"] {
+  /* Brand */
+  --color-primary: #1A6DF5;            /* 深蓝主色 */
+  --color-primary-hover: #3D83F7;      /* 悬浮态 */
+  --color-primary-active: #0F50C6;     /* 按下态 */
+  --color-primary-light: #E8F1FE;      /* 浅蓝背景 */
+  --color-primary-ghost: rgba(26, 109, 245, 0.08);
+
+  --color-accent: #00B5E5;             /* 辅助天蓝 */
+  --color-accent-hover: #1FCBFF;
+
+  /* Semantic colors */
+  --color-success: #00C853;
+  --color-warning: #FF9800;
+  --color-error: #F44336;
+
+  /* Text */
+  --color-text-primary: #18191C;
+  --color-text-secondary: #61666D;
+  --color-text-placeholder: #9499A0;
+  --color-text-inverse: #FFFFFF;
+
+  /* Background */
+  --color-bg-page: #F4F5F7;
+  --color-bg-container: #FFFFFF;
+  --color-bg-hover: #F1F2F3;
+  --color-bg-card: #FFFFFF;
+  --color-bg-overlay: rgba(0, 0, 0, 0.65);
+  --color-bg-header: #FFFFFF;
+  --color-bg-sidebar: transparent;
+
+  /* Border */
+  --color-border: #E3E5E7;
+  --color-border-light: #F1F2F3;
+
+  /* Shadow */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+  --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.06);
+  --shadow-header: 0 2px 8px rgba(0, 0, 0, 0.08);
+
+  /* Header */
+  --header-bg: #FFFFFF;
+  --header-text: var(--color-text-primary);
+  --header-search-bg: #F1F2F3;
+  --header-search-border: #E3E5E7;
+  --header-search-focus-bg: #FFFFFF;
+  --header-search-focus-border: var(--color-primary);
+  --header-search-text: var(--color-text-primary);
+  --header-search-placeholder: var(--color-text-placeholder);
+  --header-action-hover: #F1F2F3;
+  --header-action-color: var(--color-text-secondary);
+  --header-upload-bg: var(--color-primary-light);
+  --header-upload-color: var(--color-primary);
+  --header-upload-hover-bg: #D6E4FD;
+
+  /* Card */
+  --card-hover-transform: translateY(-4px);
+}
+
+/* ─── Dark Theme ─── */
+[data-theme="dark"] {
+  /* Brand */
+  --color-primary: #4D94FF;
+  --color-primary-hover: #6DAAFF;
+  --color-primary-active: #3578DD;
+  --color-primary-light: rgba(77, 148, 255, 0.12);
+  --color-primary-ghost: rgba(77, 148, 255, 0.08);
+
+  --color-accent: #00B5E5;
+  --color-accent-hover: #1FCBFF;
+
+  /* Semantic — slightly adjusted for dark */
+  --color-success: #4CAF50;
+  --color-warning: #FFB74D;
+  --color-error: #EF5350;
+
+  /* Text */
+  --color-text-primary: #E8EAED;
+  --color-text-secondary: #9AA0A6;
+  --color-text-placeholder: #5F6368;
+  --color-text-inverse: #FFFFFF;
+
+  /* Background */
+  --color-bg-page: #0D1117;
+  --color-bg-container: #161B22;
+  --color-bg-hover: #1C2333;
+  --color-bg-card: #161B22;
+  --color-bg-overlay: rgba(0, 0, 0, 0.8);
+  --color-bg-header: #161B22;
+  --color-bg-sidebar: transparent;
+
+  /* Border */
+  --color-border: #30363D;
+  --color-border-light: #21262D;
+
+  /* Shadow */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
+  --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-header: 0 1px 0 var(--color-border);
+
+  /* Header */
+  --header-bg: #161B22;
+  --header-text: var(--color-text-primary);
+  --header-search-bg: #0D1117;
+  --header-search-border: #30363D;
+  --header-search-focus-bg: #0D1117;
+  --header-search-focus-border: var(--color-primary);
+  --header-search-text: var(--color-text-primary);
+  --header-search-placeholder: var(--color-text-placeholder);
+  --header-action-hover: #1C2333;
+  --header-action-color: var(--color-text-secondary);
+  --header-upload-bg: rgba(77, 148, 255, 0.15);
+  --header-upload-color: var(--color-primary);
+  --header-upload-hover-bg: rgba(77, 148, 255, 0.25);
+
+  /* Card */
+  --card-hover-transform: translateY(-4px);
+}
+
+/* ─── Shared (non-theme) Tokens ─── */
+:root {
+  /* Typography */
+  --font-display: "PingFang SC", "HarmonyOS Sans SC", "MiSans", "Noto Sans SC", -apple-system, sans-serif;
+  --font-body: "PingFang SC", "HarmonyOS Sans SC", "Noto Sans SC", -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", ui-monospace, monospace;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.8125rem;
+  --text-base: 0.875rem;
+  --text-md: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 2rem;
+
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  --leading-tight: 1.25;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.75;
+
+  /* Spacing */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+
+  /* Radius */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-full: 9999px;
+
+  /* Transitions */
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --duration-slow: 400ms;
+  --ease-default: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* Layout */
+  --header-height: 56px;
+  --sidebar-width: 200px;
+  --content-max-width: 1440px;
+}
+
+/* ─── Reduced Motion ─── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

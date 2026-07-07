@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.myvideoplatform.mappers.SeriesVideoMapper">
+<mapper namespace="com.echoplay.mappers.SeriesVideoMapper">
 
     <!-- 结果映射 -->
-    <resultMap id="BaseResultMap" type="com.myvideoplatform.entity.po.SeriesVideo">
+    <resultMap id="BaseResultMap" type="com.echoplay.entity.po.SeriesVideo">
         <id column="id" property="id" jdbcType="BIGINT"/>
         <result column="series_id" property="seriesId" jdbcType="VARCHAR"/>
         <result column="video_id" property="videoId" jdbcType="VARCHAR"/>
@@ -20,7 +20,7 @@
     </sql>
 
     <!-- 插入系列视频关联 -->
-    <insert id="insert" parameterType="com.myvideoplatform.entity.po.SeriesVideo">
+    <insert id="insert" parameterType="com.echoplay.entity.po.SeriesVideo">
         INSERT INTO mvp_series_video (
             series_id, video_id, sort
         ) VALUES (

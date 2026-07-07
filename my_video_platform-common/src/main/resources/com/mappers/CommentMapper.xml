@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.myvideoplatform.mappers.CommentMapper">
+<mapper namespace="com.echoplay.mappers.CommentMapper">
 
     <!-- 结果映射 -->
-    <resultMap id="BaseResultMap" type="com.myvideoplatform.entity.po.Comment">
+    <resultMap id="BaseResultMap" type="com.echoplay.entity.po.Comment">
         <id column="id" property="id" jdbcType="BIGINT"/>
         <result column="comment_id" property="commentId" jdbcType="VARCHAR"/>
         <result column="video_id" property="videoId" jdbcType="VARCHAR"/>
@@ -28,7 +28,7 @@
     </sql>
 
     <!-- 插入评论 -->
-    <insert id="insert" parameterType="com.myvideoplatform.entity.po.Comment">
+    <insert id="insert" parameterType="com.echoplay.entity.po.Comment">
         INSERT INTO mvp_comment (
             comment_id, video_id, user_id, content, img_path, p_comment_id,
             reply_user_id, like_count, top_type, status
@@ -44,7 +44,7 @@
     </delete>
 
     <!-- 根据评论ID更新 -->
-    <update id="updateByCommentId" parameterType="com.myvideoplatform.entity.po.Comment">
+    <update id="updateByCommentId" parameterType="com.echoplay.entity.po.Comment">
         UPDATE mvp_comment
         <set>
             <if test="videoId != null">video_id = #{videoId},</if>

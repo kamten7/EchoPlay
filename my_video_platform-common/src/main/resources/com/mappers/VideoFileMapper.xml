@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis://DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.myvideoplatform.mappers.VideoFileMapper">
+<mapper namespace="com.echoplay.mappers.VideoFileMapper">
 
     <!-- 结果映射 -->
-    <resultMap id="BaseResultMap" type="com.myvideoplatform.entity.po.VideoFile">
+    <resultMap id="BaseResultMap" type="com.echoplay.entity.po.VideoFile">
         <id column="id" property="id" jdbcType="BIGINT"/>
         <result column="file_id" property="fileId" jdbcType="VARCHAR"/>
         <result column="user_id" property="userId" jdbcType="VARCHAR"/>
@@ -31,7 +31,7 @@
     </sql>
 
     <!-- 插入视频文件 -->
-    <insert id="insert" parameterType="com.myvideoplatform.entity.po.VideoFile">
+    <insert id="insert" parameterType="com.echoplay.entity.po.VideoFile">
         INSERT INTO mvp_video_file (
             file_id, user_id, file_name, file_size, file_path, file_suffix, md5,
             chunk_count, chunk_size, upload_id, status, duration, video_cover
@@ -52,7 +52,7 @@
     </update>
 
     <!-- 根据文件ID更新 -->
-    <update id="updateByFileId" parameterType="com.myvideoplatform.entity.po.VideoFile">
+    <update id="updateByFileId" parameterType="com.echoplay.entity.po.VideoFile">
         UPDATE mvp_video_file
         <set>
             <if test="userId != null">user_id = #{userId},</if>
@@ -72,7 +72,7 @@
     </update>
 
     <!-- 根据上传ID更新 -->
-    <update id="updateByUploadId" parameterType="com.myvideoplatform.entity.po.VideoFile">
+    <update id="updateByUploadId" parameterType="com.echoplay.entity.po.VideoFile">
         UPDATE mvp_video_file
         <set>
             <if test="fileId != null">file_id = #{fileId},</if>

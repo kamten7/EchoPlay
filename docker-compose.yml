@@ -23,6 +23,12 @@ services:
       --max_connections=500
       --wait_timeout=28800
       --interactive_timeout=28800
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
     networks:
       - mvp-network
 
@@ -36,10 +42,16 @@ services:
       - "6379:6379"
     volumes:
       - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "--no-auth-warning", "-a", "${REDIS_PASSWORD}", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+      start_period: 5s
     networks:
       - mvp-network
 
-  # ==================== MinIO ====================
+  # ==================== MinIO（对象存储）====================
   minio:
     image: minio/minio:latest
     container_name: mvp-minio
@@ -53,6 +65,12 @@ services:
       - "9001:9001"
     volumes:
       - minio_data:/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
     networks:
       - mvp-network
 
@@ -61,7 +79,8 @@ services:
     image: minio/mc:latest
     container_name: mvp-minio-init
     depends_on:
-      - minio
+      minio:
+        condition: service_healthy
     restart: "no"
     entrypoint: >
       /bin/sh -c "
@@ -73,7 +92,7 @@ services:
     networks:
       - mvp-network
 
-  # ==================== 用户端 API (my_video_platform-web) ====================
+  # ==================== 用户端 API（my_video_platform-web）====================
   my_video_platform-web:
     build:
       context: .
@@ -115,13 +134,16 @@ services:
       # 日志输出
       - ./logs/web:/app/logs
     depends_on:
-      - mysql
-      - redis
-      - minio
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      minio:
+        condition: service_healthy
     networks:
       - mvp-network
 
-  # ==================== 管理端 API (my_video_platform-admin) ====================
+  # ==================== 管理端 API（my_video_platform-admin）====================
   my_video_platform-admin:
     build:
       context: .
@@ -165,9 +187,12 @@ services:
       # 日志输出
       - ./logs/admin:/app/logs
     depends_on:
-      - mysql
-      - redis
-      - minio
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      minio:
+        condition: service_healthy
     networks:
       - mvp-network
 

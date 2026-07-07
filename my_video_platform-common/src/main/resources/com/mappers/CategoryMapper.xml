@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.myvideoplatform.mappers.CategoryMapper">
+<mapper namespace="com.echoplay.mappers.CategoryMapper">
 
     <!-- 结果映射 -->
-    <resultMap id="BaseResultMap" type="com.myvideoplatform.entity.po.Category">
+    <resultMap id="BaseResultMap" type="com.echoplay.entity.po.Category">
         <id column="id" property="id" jdbcType="BIGINT"/>
         <result column="category_id" property="categoryId" jdbcType="INTEGER"/>
         <result column="p_category_id" property="pCategoryId" jdbcType="INTEGER"/>
@@ -25,7 +25,7 @@
     </sql>
 
     <!-- 插入分类 -->
-    <insert id="insert" parameterType="com.myvideoplatform.entity.po.Category">
+    <insert id="insert" parameterType="com.echoplay.entity.po.Category">
         INSERT INTO mvp_category (
             category_id, p_category_id, category_code, category_name, icon, background, sort
         ) VALUES (
@@ -48,7 +48,7 @@
     </update>
 
     <!-- 根据分类ID更新 -->
-    <update id="updateByCategoryId" parameterType="com.myvideoplatform.entity.po.Category">
+    <update id="updateByCategoryId" parameterType="com.echoplay.entity.po.Category">
         UPDATE mvp_category
         <set>
             <if test="pCategoryId != null">p_category_id = #{pCategoryId},</if>

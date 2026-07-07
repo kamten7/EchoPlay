@@ -1,0 +1,162 @@
+{
+  "Frontloom: Vue Component": {
+    "scope": "vue",
+    "prefix": "fl-component",
+    "description": "Frontloom Vue component with typed props and script setup",
+    "body": [
+      "<script setup lang=\"ts\">",
+      "interface Props {",
+      "  ${1:title}: ${2:string};",
+      "}",
+      "",
+      "const props = defineProps<Props>();",
+      "</script>",
+      "",
+      "<template>",
+      "  <${3:div}>${0}</${3:div}>",
+      "</template>"
+    ]
+  },
+  "Frontloom: Vue Component with Emits": {
+    "scope": "vue",
+    "prefix": "fl-component-emit",
+    "description": "Frontloom Vue component with typed props and emits",
+    "body": [
+      "<script setup lang=\"ts\">",
+      "interface Props {",
+      "  ${1:item}: ${2:Item};",
+      "}",
+      "",
+      "const props = defineProps<Props>();",
+      "",
+      "const emit = defineEmits<{",
+      "  ${3:select}: [${4:id}: string];",
+      "}>();",
+      "</script>",
+      "",
+      "<template>",
+      "  <${5:div}>${0}</${5:div}>",
+      "</template>"
+    ]
+  },
+  "Frontloom: Vue v-model Component": {
+    "scope": "vue",
+    "prefix": "fl-model",
+    "description": "Frontloom Vue component with defineModel",
+    "body": [
+      "<script setup lang=\"ts\">",
+      "const modelValue = defineModel<${1:string}>({ required: true });",
+      "</script>",
+      "",
+      "<template>",
+      "  <input :value=\"modelValue\" @input=\"modelValue = ($event.target as HTMLInputElement).value\" />",
+      "</template>"
+    ]
+  },
+  "Frontloom: useFetch Pattern": {
+    "scope": "vue",
+    "prefix": "fl-fetch",
+    "description": "Frontloom Nuxt useFetch with complete UI states",
+    "body": [
+      "<script setup lang=\"ts\">",
+      "const { data: ${1:items}, status, error, refresh } = await useFetch<${2:Item}[]>(\"${3:/api/items}\");",
+      "</script>",
+      "",
+      "<template>",
+      "  <${4:Skeleton} v-if=\"status === 'pending'\" />",
+      "",
+      "  <div v-else-if=\"error\" role=\"alert\">",
+      "    <p>{{ error.message }}</p>",
+      "    <button @click=\"refresh()\">Try again</button>",
+      "  </div>",
+      "",
+      "  <div v-else-if=\"!${1:items}?.length\" role=\"status\">",
+      "    <p>${5:No items found.}</p>",
+      "  </div>",
+      "",
+      "  <ul v-else role=\"list\">",
+      "    <li v-for=\"item in ${1:items}\" :key=\"item.id\">",
+      "      ${0}",
+      "    </li>",
+      "  </ul>",
+      "</template>"
+    ]
+  },
+  "Frontloom: Vue Composable": {
+    "scope": "typescript",
+    "prefix": "fl-composable",
+    "description": "Frontloom Vue composable pattern",
+    "body": [
+      "import { ref, computed } from \"vue\";",
+      "",
+      "export function use${1:Feature}() {",
+      "  const ${2:value} = ref(${3:\"\"});",
+      "",
+      "  ${0}",
+      "",
+      "  return { ${2:value} };",
+      "}"
+    ]
+  },
+  "Frontloom: Pinia Store": {
+    "scope": "typescript",
+    "prefix": "fl-store",
+    "description": "Frontloom Pinia store with Composition API",
+    "body": [
+      "import { defineStore } from \"pinia\";",
+      "import { ref, computed } from \"vue\";",
+      "",
+      "export const use${1:Feature}Store = defineStore(\"${2:feature}\", () => {",
+      "  const ${3:items} = ref<${4:Item}[]>([]);",
+      "  const status = ref<\"idle\" | \"loading\" | \"error\">(\"idle\");",
+      "",
+      "  const ${5:count} = computed(() => ${3:items}.value.length);",
+      "",
+      "  ${0}",
+      "",
+      "  return { ${3:items}, status, ${5:count} };",
+      "});"
+    ]
+  },
+  "Frontloom: Vue Accessible Form Field": {
+    "scope": "vue",
+    "prefix": "fl-form-field",
+    "description": "Frontloom accessible form field for Vue",
+    "body": [
+      "<div>",
+      "  <label for=\"${1:field}\">${2:Label}</label>",
+      "  <input",
+      "    id=\"${1:field}\"",
+      "    name=\"${1:field}\"",
+      "    type=\"${3:text}\"",
+      "    :aria-describedby=\"${4:error} ? '${1:field}-error' : undefined\"",
+      "    :aria-invalid=\"!!${4:error}\"",
+      "    required",
+      "  />",
+      "  <p v-if=\"${4:error}\" id=\"${1:field}-error\" role=\"alert\" class=\"error\">",
+      "    {{ ${4:error} }}",
+      "  </p>",
+      "</div>"
+    ]
+  },
+  "Frontloom: Nuxt Server Route": {
+    "scope": "typescript",
+    "prefix": "fl-server-route",
+    "description": "Frontloom Nuxt server route with Zod validation",
+    "body": [
+      "import { z } from \"zod\";",
+      "",
+      "const ${1:Create}Schema = z.object({",
+      "  ${2:name}: z.string().min(1),",
+      "});",
+      "",
+      "export default defineEventHandler(async (event) => {",
+      "  const body = await readValidatedBody(event, ${1:Create}Schema.parse);",
+      "",
+      "  ${0}",
+      "",
+      "  return { data: body };",
+      "});"
+    ]
+  }
+}
