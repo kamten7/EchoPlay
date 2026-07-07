@@ -1,10 +1,10 @@
 -- ============================================
--- Kilikili 数据库初始化脚本
--- 数据库: kilikili
+-- My Video Platform 数据库初始化脚本
+-- 数据库: my_video_platform
 -- ============================================
 
-CREATE DATABASE IF NOT EXISTS `kilikili` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE `kilikili`;
+CREATE DATABASE IF NOT EXISTS `my_video_platform` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE `my_video_platform`;
 
 -- ----------------------------
 -- 用户信息表
@@ -380,4 +380,4 @@ CREATE TABLE `operation_log` (
 -- 插入默认管理员账号
 -- ----------------------------
 INSERT INTO `user_info` (`userId`, `nickName`, `email`, `password`, `sex`, `status`, `coinCount`, `currentCoinCount`)
-VALUES ('admin', '管理员', 'admin@kilikili.com', 'admin123', 0, 1, 100, 100);
+VALUES ('admin', '管理员', 'admin@myvideoplatform.com', 'admin123', 0, 1, 100, 100);

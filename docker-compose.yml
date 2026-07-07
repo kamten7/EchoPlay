@@ -4,11 +4,11 @@ services:
   # ==================== MySQL 8.0 ====================
   mysql:
     image: mysql:8.0
-    container_name: kilikili-mysql
+    container_name: mvp-mysql
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_DATABASE: my_video_platform
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     ports:
@@ -24,12 +24,12 @@ services:
       --wait_timeout=28800
       --interactive_timeout=28800
     networks:
-      - kilikili-network
+      - mvp-network
 
   # ==================== Redis ====================
   redis:
     image: redis:7-alpine
-    container_name: kilikili-redis
+    container_name: mvp-redis
     restart: always
     command: redis-server --requirepass ${REDIS_PASSWORD} --maxmemory 512mb --maxmemory-policy allkeys-lru
     ports:
@@ -37,12 +37,12 @@ services:
     volumes:
       - redis_data:/data
     networks:
-      - kilikili-network
+      - mvp-network
 
   # ==================== MinIO ====================
   minio:
     image: minio/minio:latest
-    container_name: kilikili-minio
+    container_name: mvp-minio
     restart: always
     environment:
       MINIO_ROOT_USER: ${MINIO_ROOT_USER}
@@ -54,31 +54,31 @@ services:
     volumes:
       - minio_data:/data
     networks:
-      - kilikili-network
+      - mvp-network
 
   # ==================== MinIO 初始化桶和策略 ====================
   minio-init:
     image: minio/mc:latest
-    container_name: kilikili-minio-init
+    container_name: mvp-minio-init
     depends_on:
       - minio
     restart: "no"
     entrypoint: >
       /bin/sh -c "
-      /usr/bin/mc alias set kilikili http://minio:9000 ${MINIO_ROOT_USER} ${MINIO_ROOT_PASSWORD};
-      /usr/bin/mc mb --ignore-existing kilikili/kilikili;
-      /usr/bin/mc anonymous set download kilikili/kilikili;
+      /usr/bin/mc alias set mvp http://minio:9000 ${MINIO_ROOT_USER} ${MINIO_ROOT_PASSWORD};
+      /usr/bin/mc mb --ignore-existing mvp/my_video_platform;
+      /usr/bin/mc anonymous set download mvp/my_video_platform;
       exit 0;
       "
     networks:
-      - kilikili-network
+      - mvp-network
 
-  # ==================== 用户端 API (kilikili-web) ====================
-  kilikili-web:
+  # ==================== 用户端 API (my_video_platform-web) ====================
+  my_video_platform-web:
     build:
       context: .
-      dockerfile: kilikili-web/Dockerfile
-    container_name: kilikili-web
+      dockerfile: my_video_platform-web/Dockerfile
+    container_name: mvp-web
     restart: always
     ports:
       - "7071:7071"
@@ -104,13 +104,14 @@ services:
       OSS_ENDPOINT: ${OSS_ENDPOINT:-}
       OSS_ACCESS_KEY_ID: ${OSS_ACCESS_KEY_ID:-}
       OSS_ACCESS_KEY_SECRET: ${OSS_ACCESS_KEY_SECRET:-}
-      OSS_BUCKET_NAME: ${OSS_BUCKET_NAME:-}
+      OSS_BUCKET: ${OSS_BUCKET:-}
+      OSS_PATH_PREFIX: ${OSS_PATH_PREFIX:-}
       # 项目配置
       PROJECT_FOLDER: /app/data
       LOG_LEVEL: ${LOG_LEVEL:-info}
     volumes:
       # 文件存储目录（Windows 宿主机映射）
-      - ${WINDOWS_PROJECT_DIR:-D:/webser/kilikili}:/app/data
+      - ${WINDOWS_PROJECT_DIR:-D:/webser/my_video_platform}:/app/data
       # 日志输出
       - ./logs/web:/app/logs
     depends_on:
@@ -118,14 +119,14 @@ services:
       - redis
       - minio
     networks:
-      - kilikili-network
+      - mvp-network
 
-  # ==================== 管理端 API (kilikili-admin) ====================
-  kilikili-admin:
+  # ==================== 管理端 API (my_video_platform-admin) ====================
+  my_video_platform-admin:
     build:
       context: .
-      dockerfile: kilikili-admin/Dockerfile
-    container_name: kilikili-admin
+      dockerfile: my_video_platform-admin/Dockerfile
+    container_name: mvp-admin
     restart: always
     ports:
       - "7070:7070"
@@ -151,7 +152,8 @@ services:
       OSS_ENDPOINT: ${OSS_ENDPOINT:-}
       OSS_ACCESS_KEY_ID: ${OSS_ACCESS_KEY_ID:-}
       OSS_ACCESS_KEY_SECRET: ${OSS_ACCESS_KEY_SECRET:-}
-      OSS_BUCKET_NAME: ${OSS_BUCKET_NAME:-}
+      OSS_BUCKET: ${OSS_BUCKET:-}
+      OSS_PATH_PREFIX: ${OSS_PATH_PREFIX:-}
       # 项目配置
       PROJECT_FOLDER: /app/data
       ADMIN_ACCOUNT: ${ADMIN_ACCOUNT:-admin}
@@ -159,7 +161,7 @@ services:
       LOG_LEVEL: ${LOG_LEVEL:-info}
     volumes:
       # 文件存储目录（Windows 宿主机映射）
-      - ${WINDOWS_PROJECT_DIR:-D:/webser/kilikili}:/app/data
+      - ${WINDOWS_PROJECT_DIR:-D:/webser/my_video_platform}:/app/data
       # 日志输出
       - ./logs/admin:/app/logs
     depends_on:
@@ -167,7 +169,7 @@ services:
       - redis
       - minio
     networks:
-      - kilikili-network
+      - mvp-network
 
 volumes:
   mysql_data:
@@ -178,5 +180,5 @@ volumes:
     driver: local
 
 networks:
-  kilikili-network:
+  mvp-network:
     driver: bridge

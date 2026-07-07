@@ -9,15 +9,15 @@
         <version>2.7.18</version>
         <relativePath/>
     </parent>
-    <groupId>com.kilikili</groupId>
-    <artifactId>kilikili</artifactId>
+    <groupId>com.myvideoplatform</groupId>
+    <artifactId>my_video_platform</artifactId>
     <version>1.0</version>
     <packaging>pom</packaging>
 
     <modules>
-        <module>kilikili-common</module>
-        <module>kilikili-admin</module>
-        <module>kilikili-web</module>
+        <module>my_video_platform-common</module>
+        <module>my_video_platform-admin</module>
+        <module>my_video_platform-web</module>
     </modules>
 
     <properties>
