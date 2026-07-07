@@ -7,11 +7,12 @@
     </appender>
 
     <springProperty scope="context" name="log.path" source="project.folder"/>
-    <springProperty scope="context" name="log.root.level" source="log.root.level"/>
+    <springProperty scope="context" name="log.root.level" source="log.root.level" defaultValue="info"/>
     <springProperty scope="context" name="appname" source="spring.application.name"/>
 
     <property name="LOG_FOLDER" value="logs"/>
 
+    <!-- Docker 环境下不写文件日志 -->
     <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${log.path}/${LOG_FOLDER}/${appname}.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
@@ -36,9 +37,20 @@
     <logger name="com.zaxxer.hikari" level="info"></logger>
     <logger name="io.lettuce.core" level="info"></logger>
     <logger name="org.springframework.data.redis" level="info"></logger>
-    <root level="${log.root.level}">
-        <appender-ref ref="stdot"/>
-        <appender-ref ref="file"/>
-    </root>
+
+    <!-- Docker 环境只输出到控制台，否则同时输出到文件 -->
+    <if condition='property("DOCKER_ENV").equals("true")'>
+        <then>
+            <root level="${log.root.level}">
+                <appender-ref ref="stdot"/>
+            </root>
+        </then>
+        <else>
+            <root level="${log.root.level}">
+                <appender-ref ref="stdot"/>
+                <appender-ref ref="file"/>
+            </root>
+        </else>
+    </if>
 
 </configuration>

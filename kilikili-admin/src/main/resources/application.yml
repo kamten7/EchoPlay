@@ -8,8 +8,8 @@ spring:
   application:
     name: kilikili-admin
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/kilikili?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf8&autoReconnect=true&allowMultiQueries=true&useSSL=false&allowPublicKeyRetrieval=true
-    username: root
+    url: jdbc:mysql://${MYSQL_HOST:127.0.0.1}:${MYSQL_PORT:3306}/kilikili?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf8&autoReconnect=true&allowMultiQueries=true&useSSL=false&allowPublicKeyRetrieval=true
+    username: ${MYSQL_USER:kilikili}
     password: ${DB_PASSWORD:your_password}
     driver-class-name: com.mysql.cj.jdbc.Driver
     hikari:
@@ -23,8 +23,9 @@ spring:
       connection-test-query: SELECT 1
   redis:
     database: 0
-    host: 127.0.0.1
-    port: 6379
+    host: ${REDIS_HOST:127.0.0.1}
+    port: ${REDIS_PORT:6379}
+    password: ${REDIS_PASSWORD:}
     jedis:
       pool:
         max-active: 20
@@ -40,25 +41,25 @@ mybatis:
     map-underscore-to-camel-case: true
 
 project:
-  folder: d:/webser/kilikili/
+  folder: ${PROJECT_FOLDER:d:/webser/kilikili/}
 log:
   root:
-    level: debug
+    level: ${LOG_LEVEL:debug}
 admin:
-  account: admin
-  password: admin123
+  account: ${ADMIN_ACCOUNT:admin}
+  password: ${ADMIN_PASSWORD:admin123}
 
 minio:
-  endpoint: http://127.0.0.1:9000
-  access-key: minioadmin
-  secret-key: minioadmin
-  bucket-name: kilikili
+  endpoint: ${MINIO_ENDPOINT:http://127.0.0.1:9000}
+  access-key: ${MINIO_ROOT_USER:minioadmin}
+  secret-key: ${MINIO_ROOT_PASSWORD:minioadmin}
+  bucket-name: ${MINIO_BUCKET_NAME:kilikili}
 
 oss:
-  endpoint: oss-cn-shenzhen.aliyuncs.com
-  accessKeyId: ${OSS_ACCESS_KEY_ID}
-  accessKeySecret: ${OSS_ACCESS_KEY_SECRET}
-  bucketName: ${OSS_BUCKET_NAME:your-bucket}
+  endpoint: ${OSS_ENDPOINT:oss-cn-shenzhen.aliyuncs.com}
+  accessKeyId: ${OSS_ACCESS_KEY_ID:}
+  accessKeySecret: ${OSS_ACCESS_KEY_SECRET:}
+  bucketName: ${OSS_BUCKET_NAME:}
 
 management:
   health:

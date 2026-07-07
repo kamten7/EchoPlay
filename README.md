@@ -2,12 +2,15 @@
 
 > **一个功能完备的全栈视频分享平台后端，灵感来源于 Bilibili，支持视频上传转码、弹幕互动、用户社交与管理后台。**  
 > 前端完整代码位于另一个仓库 [kilikili_front](https://github.com/kamten7)。  
+> 使用 Docker Compose 一键部署所有中间件与服务。  
 > 面向创作者与观众，提供流畅的视频消费与创作体验。
 
 ![Java](https://img.shields.io/badge/Java-8-%23ED8B00?logo=openjdk&logoColor=white)
 ![Spring Boot](https://img.shields.io/badge/Spring_Boot-2.7.18-%236DB33F?logo=springboot&logoColor=white)
 ![MySQL](https://img.shields.io/badge/MySQL-8.0-%234479A1?logo=mysql&logoColor=white)
 ![Redis](https://img.shields.io/badge/Redis-7-%23DC382D?logo=redis&logoColor=white)
+![MinIO](https://img.shields.io/badge/MinIO-Latest-%2344B7D1?logo=minio&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-Compose-%232496ED?logo=docker&logoColor=white)
 ![Vue](https://img.shields.io/badge/Vue-3.4-%234FC08D?logo=vue.js&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.4-%233178C6?logo=typescript&logoColor=white)
 ![Vite](https://img.shields.io/badge/Vite-5.2-%23646CFF?logo=vite&logoColor=white)

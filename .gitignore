@@ -2,6 +2,15 @@ target/
 *.class
 *.jar
 *.war
+*.log
+logs/
+
+# 敏感配置文件（绝不提交）
+.env
+.env.*
+!.env.example
+
+# IDE
 .idea/
 *.iml
 *.iws
@@ -9,17 +18,15 @@ target/
 .settings/
 .project
 .classpath
-bin/
-logs/
-*.log
+
+# OS
 .DS_Store
-*.local
+Thumbs.db
 
-# 敏感配置文件（包含密码等，请使用环境变量）
-application-*.yml
-!application.yml
-!application-dev.yml
+# Docker
+docker/mysql/data/
 
-# IDE
-.idea/
-*.iml
+# 本地构建产物
+kilikili-web/target/
+kilikili-admin/target/
+kilikili-common/target/
