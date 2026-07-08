@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
+
 @Mapper
 public interface UserInfoMapper {
     
@@ -76,7 +77,8 @@ public interface UserInfoMapper {
     UserInfo selectByNickName(@Param("nickName") String nickName);
     
     /**
-     * 查询所有用户列�?     */
+     * 查询所有用户列表
+     */
     List<UserInfo> selectList();
     
     /**

@@ -18,7 +18,7 @@
         <result column="is_deleted" property="isDeleted" jdbcType="TINYINT"/>
     </resultMap>
 
-    <!-- 基础�?-->
+    <!-- 基础字段列表 -->
     <sql id="Base_Column_List">
         id, message_id, receive_user_id, send_user_id, message_type, content,
         related_id, is_read, create_time, update_time, is_deleted
@@ -31,6 +31,19 @@
         ) VALUES (
             #{messageId}, #{receiveUserId}, #{sendUserId}, #{messageType}, #{content}, #{relatedId}, #{isRead}
         )
+    </insert>
+
+    <!-- 批量插入消息 -->
+    <insert id="insertBatch">
+        INSERT INTO mvp_message (
+            message_id, receive_user_id, send_user_id, message_type, content, related_id, is_read
+        ) VALUES
+        <foreach collection="list" item="item" separator=",">
+            (
+                #{item.messageId}, #{item.receiveUserId}, #{item.sendUserId}, #{item.messageType},
+                #{item.content}, #{item.relatedId}, #{item.isRead}
+            )
+        </foreach>
     </insert>
 
     <!-- 根据消息ID删除(逻辑删除) -->
@@ -71,7 +84,7 @@
         WHERE receive_user_id = #{receiveUserId} AND is_read = 0 AND is_deleted = 0
     </select>
 
-    <!-- 全部标记为已�?-->
+    <!-- 全部标记为已读 -->
     <update id="readAll">
         UPDATE mvp_message SET is_read = 1 WHERE receive_user_id = #{receiveUserId}
     </update>
@@ -113,18 +126,5 @@
         FROM mvp_message
         <include refid="Where_Condition"/>
     </select>
-
-    <!-- 批量插入消息 -->
-    <insert id="insertBatch">
-        INSERT INTO mvp_message (
-            message_id, receive_user_id, send_user_id, message_type, content, related_id, is_read
-        ) VALUES
-        <foreach collection="list" item="item" separator=",">
-            (
-                #{item.messageId}, #{item.receiveUserId}, #{item.sendUserId}, #{item.messageType},
-                #{item.content}, #{item.relatedId}, #{item.isRead}
-            )
-        </foreach>
-    </insert>
 
 </mapper>

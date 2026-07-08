@@ -8,7 +8,8 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 消息�? */
+ * 消息表
+ */
 @Data
 public class Message implements Serializable {
     private Long id;

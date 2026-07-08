@@ -8,7 +8,8 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 系列视频关联�? */
+ * 系列视频关联表
+ */
 @Data
 public class SeriesVideo implements Serializable {
     private Long id;

@@ -17,13 +17,13 @@
         <result column="is_deleted" property="isDeleted" jdbcType="TINYINT"/>
     </resultMap>
 
-    <!-- 基础�?-->
+    <!-- 基础字段列表 -->
     <sql id="Base_Column_List">
         id, user_id, video_id, comment_id, action_type, action_count,
         last_action_time, create_time, update_time, is_deleted
     </sql>
 
-    <!-- 插入用户行为（存在重复键时更新，避免并发插入报错�?-->
+    <!-- 插入用户行为（存在重复键时更新，避免并发插入报错） -->
     <insert id="insert" parameterType="com.echoplay.entity.po.UserAction">
         INSERT INTO mvp_user_action (
             user_id, video_id, comment_id, action_type, action_count, last_action_time
@@ -35,6 +35,16 @@
             action_count = VALUES(action_count),
             last_action_time = VALUES(last_action_time),
             is_deleted = 0
+    </insert>
+
+    <!-- 批量插入 -->
+    <insert id="insertBatch" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO mvp_user_action (
+            user_id, video_id, comment_id, action_type, action_count, last_action_time
+        ) VALUES
+        <foreach collection="list" item="item" separator=",">
+            (#{item.userId}, #{item.videoId}, #{item.commentId}, #{item.actionType}, #{item.actionCount}, #{item.lastActionTime})
+        </foreach>
     </insert>
 
     <!-- 根据ID删除(逻辑删除) -->
@@ -63,7 +73,7 @@
         WHERE id = #{id} AND is_deleted = 0
     </select>
 
-    <!-- 查询所有用户行�?-->
+    <!-- 查询所有用户行为 -->
     <select id="selectList" resultMap="BaseResultMap">
         SELECT <include refid="Base_Column_List"/>
         FROM mvp_user_action
@@ -71,7 +81,7 @@
         ORDER BY create_time DESC
     </select>
 
-    <!-- 根据用户、视频和行为类型查询（仅视频级别�?-->
+    <!-- 根据用户、视频和行为类型查询（仅视频级别） -->
     <select id="selectByUserVideoAction" resultMap="BaseResultMap">
         SELECT <include refid="Base_Column_List"/>
         FROM mvp_user_action
@@ -92,7 +102,7 @@
         LIMIT 1
     </select>
 
-    <!-- 根据用户、视频和行为类型更新（用于逻辑删除�?-->
+    <!-- 根据用户、视频和行为类型更新（用于逻辑删除） -->
     <update id="updateByUserVideoAction" parameterType="com.echoplay.entity.po.UserAction">
         UPDATE mvp_user_action
         <set>
@@ -104,16 +114,6 @@
         </set>
         WHERE user_id = #{userId} AND video_id = #{videoId} AND comment_id = #{commentId} AND action_type = #{actionType}
     </update>
-
-    <!-- 批量插入 -->
-    <insert id="insertBatch" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO mvp_user_action (
-            user_id, video_id, comment_id, action_type, action_count, last_action_time
-        ) VALUES
-        <foreach collection="list" item="item" separator=",">
-            (#{item.userId}, #{item.videoId}, #{item.commentId}, #{item.actionType}, #{item.actionCount}, #{item.lastActionTime})
-        </foreach>
-    </insert>
 
     <!-- 动态WHERE条件 -->
     <sql id="Where_Condition">

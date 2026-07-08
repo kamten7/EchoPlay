@@ -21,7 +21,7 @@
         <result column="is_deleted" property="isDeleted" jdbcType="TINYINT"/>
     </resultMap>
 
-    <!-- 基础�?-->
+    <!-- 基础字段列表 -->
     <sql id="Base_Column_List">
         id, comment_id, video_id, user_id, content, img_path, p_comment_id,
         reply_user_id, like_count, top_type, status, create_time, update_time, is_deleted
@@ -38,9 +38,28 @@
         )
     </insert>
 
-    <!-- 根据评论ID删除(硬删�? -->
+    <!-- 批量插入评论 -->
+    <insert id="insertBatch">
+        INSERT INTO mvp_comment (
+            comment_id, video_id, user_id, content, img_path, p_comment_id,
+            reply_user_id, like_count, top_type, status
+        ) VALUES
+        <foreach collection="list" item="item" separator=",">
+            (
+                #{item.commentId}, #{item.videoId}, #{item.userId}, #{item.content}, #{item.imgPath}, #{item.pCommentId},
+                #{item.replyUserId}, #{item.likeCount}, #{item.topType}, #{item.status}
+            )
+        </foreach>
+    </insert>
+
+    <!-- 根据评论ID删除(硬删除) -->
     <delete id="deleteByCommentId">
         DELETE FROM mvp_comment WHERE comment_id = #{commentId}
+    </delete>
+
+    <!-- 根据视频ID删除(硬删除) -->
+    <delete id="deleteByVideoId">
+        DELETE FROM mvp_comment WHERE video_id = #{videoId}
     </delete>
 
     <!-- 根据评论ID更新 -->
@@ -60,7 +79,7 @@
         WHERE comment_id = #{commentId}
     </update>
 
-    <!-- 递增/递减评论点赞�?-->
+    <!-- 递增/递减评论点赞数 -->
     <update id="updateLikeCount">
         UPDATE mvp_comment
         SET like_count = like_count + #{delta}
@@ -82,7 +101,7 @@
         ORDER BY create_time DESC
     </select>
 
-    <!-- 查询所有评�?-->
+    <!-- 查询所有评论 -->
     <select id="selectList" resultMap="BaseResultMap">
         SELECT <include refid="Base_Column_List"/>
         FROM mvp_comment

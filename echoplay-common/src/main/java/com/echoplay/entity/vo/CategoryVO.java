@@ -35,6 +35,7 @@ public class CategoryVO implements Serializable {
     private Date updateTime;
 
     /**
-     * 子分类列�?     */
+     * 子分类列表
+     */
     private List<CategoryVO> children;
 }

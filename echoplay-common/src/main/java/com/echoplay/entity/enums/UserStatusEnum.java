@@ -1,9 +1,10 @@
 package com.echoplay.entity.enums;
 
 /**
- * 用户状态枚�? */
+ * 用户状态枚举
+ */
 public enum UserStatusEnum {
-    DISABLE(0, "禁用"),
+    DISABLED(0, "禁用"),
     NORMAL(1, "正常"),
     SECRECY(2, "保密"),
     CANCELED( 3, "注销");

@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
+
 @Mapper
 public interface VideoPMapper {
     Integer insert(VideoP videoP);
@@ -15,6 +16,8 @@ public interface VideoPMapper {
     Integer deleteByVideoId(@Param("videoId") String videoId);
     Integer updateByPId(VideoP videoP);
     VideoP selectByPId(@Param("pId") String pId);
+    List<VideoP> selectByVideoId(@Param("videoId") String videoId);
+    List<VideoP> selectList();
     List<VideoP> selectListByCondition(@Param("query") VideoPQuery query);
     Long selectCountByCondition(@Param("query") VideoPQuery query);
 }

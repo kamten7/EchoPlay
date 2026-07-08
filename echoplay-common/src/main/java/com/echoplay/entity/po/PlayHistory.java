@@ -8,7 +8,8 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 播放历史�? */
+ * 播放历史表
+ */
 @Data
 public class PlayHistory implements Serializable {
     private Long id;

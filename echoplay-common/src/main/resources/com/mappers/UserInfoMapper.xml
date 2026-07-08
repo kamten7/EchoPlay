@@ -24,7 +24,7 @@
         <result column="theme" property="theme" jdbcType="TINYINT"/>
     </resultMap>
 
-    <!-- 基础�?-->
+    <!-- 基础字段列表 -->
     <sql id="Base_Column_List">
         user_id, nick_name, email, password, avatar, sex, birthday, school, person_introduction,
         join_time, last_login_time, last_login_ip, status, notice_info, total_coin_count,
@@ -115,7 +115,7 @@
         WHERE email = #{email} AND is_deleted = 0
     </select>
 
-    <!-- 查询所有用�?-->
+    <!-- 查询所有用户 -->
     <select id="selectList" resultMap="BaseResultMap">
         SELECT <include refid="Base_Column_List"/>
         FROM mvp_user_info

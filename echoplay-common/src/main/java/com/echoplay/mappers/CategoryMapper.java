@@ -7,9 +7,11 @@ import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
+
 @Mapper
 public interface CategoryMapper {
     Integer insert(Category category);
+    Integer insertBatch(@Param("list") List<Category> list);
     Integer deleteByCategoryId(@Param("categoryId") Integer categoryId);
     Integer deleteByPCategoryId(@Param("pCategoryId") Integer pCategoryId);
     Integer updateByCategoryId(Category category);

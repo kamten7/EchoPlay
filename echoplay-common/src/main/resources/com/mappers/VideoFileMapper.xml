@@ -24,7 +24,7 @@
         <result column="is_deleted" property="isDeleted" jdbcType="TINYINT"/>
     </resultMap>
 
-    <!-- 基础�?-->
+    <!-- 基础字段列表 -->
     <sql id="Base_Column_List">
         id, file_id, user_id, file_name, file_size, file_path, file_suffix, md5,
         chunk_count, chunk_size, upload_id, status, duration, video_cover, create_time, update_time, is_deleted
@@ -120,7 +120,7 @@
         WHERE upload_id = #{uploadId} AND is_deleted = 0
     </select>
 
-    <!-- 查询所有视频文�?-->
+    <!-- 查询所有视频文件 -->
     <select id="selectList" resultMap="BaseResultMap">
         SELECT <include refid="Base_Column_List"/>
         FROM mvp_video_file

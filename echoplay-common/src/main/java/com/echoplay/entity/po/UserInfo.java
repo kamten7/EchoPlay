@@ -25,26 +25,30 @@ public class UserInfo implements Serializable {
     private String birthday;
     //学校
     private String school;
-    //个人简�?    private String personIntroduction;
+    //个人简介
+    private String personIntroduction;
     //加入时间
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date joinTime;
-    //最后登录时�?    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    //最后登录时间
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date lastLoginTime;
     //最后登录IP
     private String lastLoginIp;
-    //用户状�?    private Integer status;
+    //用户状态
+    private Integer status;
     //空间公告
     private String noticeInfo;
     //硬币总数
     private Integer coinCount;
-    //当前硬币�?    private Integer currentCoinCount;
+    //当前硬币数
+    private Integer currentCoinCount;
     //主题
     private int theme;
 
-    // 无参构造函�?MyBatis需�?
+    // 无参构造函数（MyBatis需要）
     public UserInfo() {
     }
 

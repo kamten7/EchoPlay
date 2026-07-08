@@ -1,3 +1,4 @@
+
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
@@ -14,7 +15,7 @@
         <result column="is_deleted" property="isDeleted" jdbcType="TINYINT"/>
     </resultMap>
 
-    <!-- 基础�?-->
+    <!-- 基础字段列表 -->
     <sql id="Base_Column_List">
         id, setting_key, setting_value, setting_description, create_time, update_time, is_deleted
     </sql>
@@ -28,7 +29,7 @@
         )
     </insert>
 
-    <!-- 根据设置键更�?-->
+    <!-- 根据设置键更新 -->
     <update id="updateBySettingKey" parameterType="com.echoplay.entity.po.SysSetting">
         UPDATE mvp_sys_setting
         <set>
@@ -38,7 +39,7 @@
         WHERE setting_key = #{settingKey}
     </update>
 
-    <!-- 根据设置键查�?-->
+    <!-- 根据设置键查询 -->
     <select id="selectBySettingKey" resultMap="BaseResultMap">
         SELECT <include refid="Base_Column_List"/>
         FROM mvp_sys_setting

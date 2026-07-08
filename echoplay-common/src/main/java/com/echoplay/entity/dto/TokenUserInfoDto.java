@@ -12,6 +12,7 @@ public class TokenUserInfoDto implements Serializable {
     private String userId;
     private String nickName;
     private String avatar;
+    private String email;
     private Long expireTime;// 过期时间
     private String token;
 

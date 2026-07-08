@@ -20,7 +20,7 @@
         <result column="is_deleted" property="isDeleted" jdbcType="TINYINT"/>
     </resultMap>
 
-    <!-- 基础�?-->
+    <!-- 基础字段列表 -->
     <sql id="Base_Column_List">
         id, upload_id, user_id, file_name, file_size, chunk_count, uploaded_chunks,
         md5, file_path, status, create_time, update_time, is_deleted
@@ -65,7 +65,7 @@
         <where>
             <if test="query.uploadId != null and query.uploadId != ''">AND upload_id = #{query.uploadId}</if>
             <if test="query.userId != null and query.userId != ''">AND user_id = #{query.userId}</if>
-            <if test="query.fileName != null and query.fileName != ''">AND file_name LIKE CONCAT('%', #{query.fileName}, '%')</if>
+            <if test="query.fileNameFuzzy != null and query.fileNameFuzzy != ''">AND file_name LIKE CONCAT('%', #{query.fileNameFuzzy}, '%')</if>
             <if test="query.status != null">AND status = #{query.status}</if>
         </where>
     </sql>

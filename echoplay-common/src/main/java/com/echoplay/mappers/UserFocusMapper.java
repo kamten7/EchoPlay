@@ -7,9 +7,11 @@ import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
+
 @Mapper
 public interface UserFocusMapper {
     Integer insert(UserFocus userFocus);
+    Integer insertBatch(@Param("list") List<UserFocus> list);
     Integer deleteByUserFocus(@Param("userId") String userId, @Param("focusUserId") String focusUserId);
     UserFocus selectByUserFocus(@Param("userId") String userId, @Param("focusUserId") String focusUserId);
     List<UserFocus> selectListByCondition(@Param("query") UserFocusQuery query);

@@ -9,7 +9,8 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 评论�? */
+ * 评论表
+ */
 @Data
 public class Comment implements Serializable {
     private Long id;

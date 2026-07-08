@@ -8,7 +8,8 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 用户行为�? */
+ * 用户行为表
+ */
 @Data
 public class UserAction implements Serializable {
     private Long id;

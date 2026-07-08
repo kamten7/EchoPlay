@@ -17,7 +17,7 @@
         <result column="is_deleted" property="isDeleted" jdbcType="TINYINT"/>
     </resultMap>
 
-    <!-- 基础�?-->
+    <!-- 基础字段列表 -->
     <sql id="Base_Column_List">
         id, series_id, user_id, series_name, series_cover, series_description,
         sort, create_time, update_time, is_deleted
@@ -62,7 +62,7 @@
         <where>
             <if test="query.seriesId != null and query.seriesId != ''">AND series_id = #{query.seriesId}</if>
             <if test="query.userId != null and query.userId != ''">AND user_id = #{query.userId}</if>
-            <if test="query.seriesName != null and query.seriesName != ''">AND series_name LIKE CONCAT('%', #{query.seriesName}, '%')</if>
+            <if test="query.seriesNameFuzzy != null and query.seriesNameFuzzy != ''">AND series_name LIKE CONCAT('%', #{query.seriesNameFuzzy}, '%')</if>
         </where>
     </sql>
 

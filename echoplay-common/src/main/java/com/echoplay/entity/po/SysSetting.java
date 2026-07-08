@@ -8,7 +8,8 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 系统设置�? */
+ * 系统设置表
+ */
 @Data
 public class SysSetting implements Serializable {
     private Long id;

@@ -7,10 +7,15 @@ import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
+
 @Mapper
 public interface UserActionMapper {
     Integer insert(UserAction userAction);
     Integer insertBatch(@Param("list") List<UserAction> list);
+    Integer deleteById(@Param("id") Long id);
+    Integer updateById(UserAction userAction);
+    UserAction selectById(@Param("id") Long id);
+    List<UserAction> selectList();
     Integer updateByUserVideoAction(UserAction userAction);
     UserAction selectByUserVideoAction(@Param("userId") String userId, @Param("videoId") String videoId, @Param("actionType") Integer actionType);
     UserAction selectByUserCommentAction(@Param("userId") String userId, @Param("commentId") String commentId, @Param("actionType") Integer actionType);

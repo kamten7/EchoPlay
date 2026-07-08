@@ -260,8 +260,8 @@ public class FFmpegUtils {
                 while ((line = reader.readLine()) != null) {
                     if (line.contains("Duration:")) {
                         // Duration: 00:01:23.45, start: 0.000000, bitrate: 1234 kb/s
-                        String[] parts = line.split("Duration:")[1].split(",")[0].trim();
-                        String[] timeParts = parts.split(":");
+                        String durationStr = line.split("Duration:")[1].split(",")[0].trim();
+                        String[] timeParts = durationStr.split(":");
                         int hours = Integer.parseInt(timeParts[0]);
                         int minutes = Integer.parseInt(timeParts[1]);
                         double seconds = Double.parseDouble(timeParts[2]);

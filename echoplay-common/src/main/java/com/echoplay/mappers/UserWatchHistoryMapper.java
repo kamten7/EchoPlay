@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import java.util.Date;
 import java.util.List;
 
+
 @Mapper
 public interface UserWatchHistoryMapper {
     Integer insertOrUpdate(@Param("userId") String userId, @Param("videoId") String videoId);

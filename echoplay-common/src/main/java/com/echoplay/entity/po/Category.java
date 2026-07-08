@@ -8,7 +8,8 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 分类�? */
+ * 分类表
+ */
 @Data
 public class Category implements Serializable {
     private Long id;

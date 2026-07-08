@@ -8,7 +8,8 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 弹幕�? */
+ * 弹幕表
+ */
 @Data
 public class Danmu implements Serializable {
     private Long id;

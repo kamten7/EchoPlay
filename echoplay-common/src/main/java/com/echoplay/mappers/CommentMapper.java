@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
+
 @Mapper
 public interface CommentMapper {
     Integer insert(Comment comment);
@@ -16,6 +17,8 @@ public interface CommentMapper {
     Integer deleteByVideoId(@Param("videoId") String videoId);
     Integer updateByCommentId(Comment comment);
     Comment selectByCommentId(@Param("commentId") String commentId);
+    List<Comment> selectByVideoId(@Param("videoId") String videoId);
+    List<Comment> selectList();
     List<Comment> selectListByCondition(@Param("query") CommentQuery query);
     Long selectCountByCondition(@Param("query") CommentQuery query);
 }

@@ -8,7 +8,8 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 用户关注�? */
+ * 用户关注表
+ */
 @Data
 public class UserFocus implements Serializable {
     private Long id;

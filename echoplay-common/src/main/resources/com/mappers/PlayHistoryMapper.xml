@@ -17,7 +17,7 @@
         <result column="is_deleted" property="isDeleted" jdbcType="TINYINT"/>
     </resultMap>
 
-    <!-- 基础�?-->
+    <!-- 基础字段列表 -->
     <sql id="Base_Column_List">
         id, user_id, video_id, file_id, progress, duration,
         last_play_time, create_time, update_time, is_deleted

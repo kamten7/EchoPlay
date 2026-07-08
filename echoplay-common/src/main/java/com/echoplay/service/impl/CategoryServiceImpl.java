@@ -150,7 +150,8 @@ public class CategoryServiceImpl implements CategoryService {
         if (category == null) {
             return;
         }
-        // 软删除自�?        categoryMapper.deleteByCategoryId(categoryId);
+        // 软删除自身
+        categoryMapper.deleteByCategoryId(categoryId);
         // 如果是父分类，级联软删除其子分类
         if (category.getPCategoryId() != null && category.getPCategoryId() == 0) {
             categoryMapper.deleteByPCategoryId(categoryId);
