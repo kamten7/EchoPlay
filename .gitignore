@@ -30,3 +30,6 @@ docker/mysql/data/
 echoplay-web/target/
 echoplay-admin/target/
 echoplay-common/target/
+
+#.claude/
+.claude
