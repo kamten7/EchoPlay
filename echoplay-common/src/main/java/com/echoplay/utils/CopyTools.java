@@ -5,6 +5,7 @@ import org.springframework.beans.BeanUtils;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class CopyTools {
     public static <T, S> List<T> copyList(List<S> sList, Class<T> classz) {
         List<T> list = new ArrayList<T>();

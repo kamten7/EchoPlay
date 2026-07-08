@@ -24,7 +24,7 @@
         <result column="is_deleted" property="isDeleted" jdbcType="TINYINT"/>
     </resultMap>
 
-    <!-- 基础�?-->
+    <!-- 基础�?-->
     <sql id="Base_Column_List">
         id, file_id, user_id, file_name, file_size, file_path, file_suffix, md5,
         chunk_count, chunk_size, upload_id, status, duration, video_cover, create_time, update_time, is_deleted
@@ -39,6 +39,22 @@
             #{fileId}, #{userId}, #{fileName}, #{fileSize}, #{filePath}, #{fileSuffix}, #{md5},
             #{chunkCount}, #{chunkSize}, #{uploadId}, #{status}, #{duration}, #{videoCover}
         )
+    </insert>
+
+    <!-- 批量插入视频文件 -->
+    <insert id="insertBatch">
+        INSERT INTO mvp_video_file (
+            file_id, user_id, file_name, file_size, file_path, file_suffix, md5,
+            chunk_count, chunk_size, upload_id, status, duration, video_cover
+        ) VALUES
+        <foreach collection="list" item="item" separator=",">
+            (
+                #{item.fileId}, #{item.userId}, #{item.fileName}, #{item.fileSize}, 
+                #{item.filePath}, #{item.fileSuffix}, #{item.md5},
+                #{item.chunkCount}, #{item.chunkSize}, #{item.uploadId}, 
+                #{item.status}, #{item.duration}, #{item.videoCover}
+            )
+        </foreach>
     </insert>
 
     <!-- 根据文件ID删除(逻辑删除) -->
@@ -104,7 +120,7 @@
         WHERE upload_id = #{uploadId} AND is_deleted = 0
     </select>
 
-    <!-- 查询所有视频文�?-->
+    <!-- 查询所有视频文�?-->
     <select id="selectList" resultMap="BaseResultMap">
         SELECT <include refid="Base_Column_List"/>
         FROM mvp_video_file
