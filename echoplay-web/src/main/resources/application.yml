@@ -1,15 +1,15 @@
 server:
-  port: 7070
+  port: 7071
 spring:
   servlet:
     multipart:
-      max-file-size: 10MB
-      max-request-size: 15MB
+      max-file-size: 100MB
+      max-request-size: 150MB
   application:
-    name: my-video-platform-admin
+    name: my-video-platform-web
   datasource:
-    url: jdbc:mysql://${MYSQL_HOST:127.0.0.1}:${MYSQL_PORT:3306}/my_video_platform?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf8&autoReconnect=true&allowMultiQueries=true&useSSL=false&allowPublicKeyRetrieval=true
-    username: ${MYSQL_USER:my_video_platform}
+    url: jdbc:mysql://${MYSQL_HOST:127.0.0.1}:${MYSQL_PORT:3306}/echoplay?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf8&autoReconnect=true&allowMultiQueries=true&useSSL=false&allowPublicKeyRetrieval=true
+    username: ${MYSQL_USER:echoplay}
     password: ${DB_PASSWORD:your_password}
     driver-class-name: com.mysql.cj.jdbc.Driver
     hikari:
@@ -36,24 +36,23 @@ spring:
 #mybatis 大小写转驼峰
 mybatis:
   mapper-locations: classpath*:com/mappers/*.xml
-  type-aliases-package: com.myvideoplatform.entity.po
+  type-aliases-package: com.echoplay.entity.po
   configuration:
     map-underscore-to-camel-case: true
 
 project:
-  folder: ${PROJECT_FOLDER:d:/webser/my_video_platform/}
+  folder: ${PROJECT_FOLDER:d:/webser/echoplay/}
+ffmpeg:
+  path: ${FFMPEG_PATH:}
 log:
   root:
     level: ${LOG_LEVEL:debug}
-admin:
-  account: ${ADMIN_ACCOUNT:admin}
-  password: ${ADMIN_PASSWORD:admin123}
 
 minio:
   endpoint: ${MINIO_ENDPOINT:http://127.0.0.1:9000}
   access-key: ${MINIO_ROOT_USER:minioadmin}
   secret-key: ${MINIO_ROOT_PASSWORD:minioadmin}
-  bucket-name: ${MINIO_BUCKET_NAME:my_video_platform}
+  bucket-name: ${MINIO_BUCKET_NAME:echoplay}
 
 oss:
   endpoint: ${OSS_ENDPOINT:oss-cn-shenzhen.aliyuncs.com}

@@ -12,7 +12,7 @@ RUN apt-get update && \
 # 创建必要的目录
 RUN mkdir -p /app/logs /app/video/upload /app/video/original
 
-COPY target/my_video_platform-web-1.0.jar app.jar
+COPY target/echoplay-web-1.0.jar app.jar
 
 # 暴露端口
 EXPOSE 7071

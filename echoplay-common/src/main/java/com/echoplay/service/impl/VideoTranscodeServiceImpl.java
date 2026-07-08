@@ -64,7 +64,7 @@ public class VideoTranscodeServiceImpl implements VideoTranscodeService {
             // 确定项目目录
             String projectFolder = appconfig.getProjectFolder();
             if (projectFolder == null || projectFolder.isEmpty()) {
-                projectFolder = System.getProperty("java.io.tmpdir") + "/my_video_platform/";
+                projectFolder = System.getProperty("java.io.tmpdir") + "/echoplay/";
             }
             String transcodeDir = projectFolder + "video/transcode/" + fileId + "/";
             new File(transcodeDir).mkdirs();

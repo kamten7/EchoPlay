@@ -27,6 +27,6 @@ Thumbs.db
 docker/mysql/data/
 
 # 本地构建产物
-my_video_platform-web/target/
-my_video_platform-admin/target/
-my_video_platform-common/target/
+echoplay-web/target/
+echoplay-admin/target/
+echoplay-common/target/

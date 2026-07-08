@@ -10,14 +10,14 @@
         <relativePath/>
     </parent>
     <groupId>com.echoplay</groupId>
-    <artifactId>my_video_platform</artifactId>
+    <artifactId>echoplay</artifactId>
     <version>1.0</version>
     <packaging>pom</packaging>
 
     <modules>
-        <module>my_video_platform-common</module>
-        <module>my_video_platform-admin</module>
-        <module>my_video_platform-web</module>
+        <module>echoplay-common</module>
+        <module>echoplay-admin</module>
+        <module>echoplay-web</module>
     </modules>
 
     <properties>

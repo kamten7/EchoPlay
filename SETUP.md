@@ -2,9 +2,9 @@
 ## 项目概述
 
 My Video Platform 是一个全栈视频分享平台后端，灵感来源于 Bilibili。项目采用 Spring Boot + MyBatis + MySQL + Redis 技术栈，支持视频分片上传、FFmpeg 异步转码、弹幕系统、用户社交等完整功能。
-**GitHub 仓库**: https://github.com/kamten7/My_video_platform.git
+**GitHub 仓库**: https://github.com/kamten07/EchoPlay.git
 
-**前端仓库**: 前端代码（Vue 3 + TypeScript + Vite）在独立仓库 My_video_platform_front 中。
+**前端仓库**: 前端代码（Vue 3 + TypeScript + Vite）在独立仓库 echoplay-front 中。
 ---
 
 ## 技术栈
@@ -68,8 +68,8 @@ My Video Platform 是一个全栈视频分享平台后端，灵感来源于 Bili
 ### 第 1 步：克隆项目
 
 ```bash
-git clone https://github.com/kamten7/My_video_platform.git
-cd My_video_platform
+git clone https://github.com/kamten07/EchoPlay.git
+cd EchoPlay
 ```
 
 ### 第 2 步：配置环境变量
@@ -83,7 +83,7 @@ copy .env.example .env
 #   MYSQL_PASSWORD         - MySQL 应用用户密码
 #   REDIS_PASSWORD         - Redis 密码
 #   MINIO_ROOT_PASSWORD    - MinIO 密码
-#   WINDOWS_PROJECT_DIR    - 文件存储目录（Windows 路径，如 D:/webser/my_video_platform）
+#   WINDOWS_PROJECT_DIR    - 文件存储目录（Windows 路径，如 D:/webser/echoplay）
 #   WINDOWS_FFMPEG_PATH    - FFmpeg 路径（可选，无则跳过转码）
 ```
 
@@ -91,8 +91,8 @@ copy .env.example .env
 
 ```powershell
 # 在 PowerShell 中执行
-mkdir D:\webser\my_video_platform\video\upload -Force
-mkdir D:\webser\my_video_platform\video\original -Force
+mkdir D:\webser\echoplay\video\upload -Force
+mkdir D:\webser\echoplay\video\original -Force
 mkdir logs -Force
 ```
 
@@ -105,8 +105,8 @@ mvn clean package -DskipTests
 ```
 
 编译成功后会生成：
-- `my_video_platform-web/target/my_video_platform-web-1.0.jar`
-- `my_video_platform-admin/target/my_video_platform-admin-1.0.jar`
+- `echoplay-web/target/echoplay-web-1.0.jar`
+- `echoplay-admin/target/echoplay-admin-1.0.jar`
 
 ### 第 5 步：启动 Docker 服务
 
@@ -121,8 +121,8 @@ docker-compose ps
 docker-compose logs -f mysql      # MySQL 日志
 docker-compose logs -f redis      # Redis 日志
 docker-compose logs -f minio      # MinIO 日志
-docker-compose logs -f my_video_platform-web    # 用户端 API 日志
-docker-compose logs -f my_video_platform-admin  # 管理端 API 日志
+docker-compose logs -f echoplay-web    # 用户端 API 日志
+docker-compose logs -f echoplay-admin  # 管理端 API 日志
 ```
 
 ### 第 6 步：验证服务
@@ -152,7 +152,7 @@ docker-compose down
 docker-compose down -v
 
 # 重启某个服务
-docker-compose restart my_video_platform-web
+docker-compose restart echoplay-web
 
 # 进入 MySQL 容器
 docker exec -it mvp-mysql mysql -uroot -p
@@ -172,7 +172,7 @@ docker-compose up -d --build
 2. 创建数据库：
 
 ```sql
-CREATE DATABASE my_video_platform DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE DATABASE echoplay DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 ```
 
 3. 执行建表脚本：`docker/mysql/init.sql`
@@ -187,7 +187,7 @@ redis-cli ping   # 应返回 PONG
 ### 第 3 步：修改配置文件
 
 编辑以下配置文件：
-**`my_video_platform-web/src/main/resources/application.yml`**：
+**`echoplay-web/src/main/resources/application.yml`**：
 ```yaml
 spring:
   datasource:
@@ -196,13 +196,13 @@ spring:
     password: 你的Redis密码
 
 project:
-  folder: d:/webser/my_video_platform/   # 文件存储目录
+  folder: d:/webser/echoplay/   # 文件存储目录
 
 ffmpeg:
   path: C:/Program Files/ffmpeg/bin/ffmpeg.exe  # 可选
 ```
 
-**`my_video_platform-admin/src/main/resources/application.yml`**：
+**`echoplay-admin/src/main/resources/application.yml`**：
 ```yaml
 spring:
   datasource:
@@ -220,10 +220,10 @@ admin:
 mvn clean package -DskipTests
 
 # 终端 1：用户端 API（端口 7071）
-java -jar my_video_platform-web/target/my_video_platform-web-1.0.jar
+java -jar echoplay-web/target/echoplay-web-1.0.jar
 
 # 终端 2：管理端 API（端口 7070）
-java -jar my_video_platform-admin/target/my_video_platform-admin-1.0.jar
+java -jar echoplay-admin/target/echoplay-admin-1.0.jar
 ```
 
 ---
@@ -242,7 +242,7 @@ OSS_BUCKET_NAME=your-bucket
 ```
 3. 重启服务：
 ```powershell
-docker-compose restart my_video_platform-web my_video_platform-admin
+docker-compose restart echoplay-web echoplay-admin
 ```
 
 > **安全提示**：OSS 密钥只存在于 `.env` 文件中，该文件已被 `.gitignore` 排除，不会提交到 Git。
@@ -251,24 +251,24 @@ docker-compose restart my_video_platform-web my_video_platform-admin
 ## 项目模块结构
 
 ```
-my_video_platform/
+EchoPlay/
 ├── docker-compose.yml          # Docker 编排文件
 ├── .env.example                # 环境变量模板
 ├── .env                        # 你的私有配置（不提交到 Git）
 ├── docker/
 │   └── mysql/
 │       └── init.sql            # 数据库初始化脚本
-├── my_video_platform-web/               # 用户端 API（端口 7071）
+├── echoplay-web/               # 用户端 API（端口 7071）
 │   ├── Dockerfile
 │   └── src/main/resources/
 │       ├── application.yml
 │       └── logback-spring.xml
-├── my_video_platform-admin/             # 管理端 API（端口 7070）
+├── echoplay-admin/             # 管理端 API（端口 7070）
 │   ├── Dockerfile
 │   └── src/main/resources/
 │       ├── application.yml
 │       └── logback-spring.xml
-└── my_video_platform-common/            # 共享模块
+└── echoplay-common/            # 共享模块
     ├── entity/                 # 数据实体
     ├── mappers/                # MyBatis Mapper
     ├── service/                # 业务逻辑

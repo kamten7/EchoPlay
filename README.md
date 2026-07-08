@@ -87,13 +87,13 @@ EchoPlay 是一个前后端分离的全栈视频分享平台，灵感来源于 B
             │                            │
 ┌───────────┼───────────────────────────┼────────────────────┐
 │  ┌────────▼───────────┐  ┌───────────▼────────────────┐   │
-│  │  my_video_platform-web         │  │  my_video_platform-admin       │   │
+│  │  echoplay-web         │  │  echoplay-admin       │   │
 │  │  (Spring Boot, 7071)  │  │  (Spring Boot, 7070)            │   │
 │  └──────────┬───────────┘  └──────────┬────────────────┘   │
 │             └──────────┬──────────────┘                     │
 │                        │                                    │
 │           ┌────────────▼─────────────┐                      │
-│           │   my_video_platform-common    │                  │
+│           │   echoplay-common    │                  │
 │           │   共享实体 / Mapper / Service │                  │
 │           └────────────┬─────────────┘                      │
 │                        │                                    │
@@ -175,16 +175,16 @@ docker compose -f docker-compose.dev.yml up -d
 mvn clean package -DskipTests
 
 # 用户端 API（端口 7071）
-java -jar my_video_platform-web/target/my_video_platform-web-1.0.jar
+java -jar echoplay-web/target/echoplay-web-1.0.jar
 
 # 管理端 API（端口 7070，新终端）
-java -jar my_video_platform-admin/target/my_video_platform-admin-1.0.jar
+java -jar echoplay-admin/target/echoplay-admin-1.0.jar
 ```
 
 ### 4. 启动前端
 
 ```bash
-cd My_video_platform_front
+cd echoplay-front
 npm install
 npm run dev    # http://localhost:3000
 ```
@@ -204,7 +204,7 @@ npm run dev    # http://localhost:3000
 
 ```
 EchoPlay/
-├── My_video_platform_front/          # 前端（Vue 3 + Vite + TypeScript）
+├── echoplay-front/          # 前端（Vue 3 + Vite + TypeScript）
 │   ├── src/
 │   │   ├── types/                    # TypeScript 类型
 │   │   ├── router/                   # Vue Router
@@ -217,13 +217,13 @@ EchoPlay/
 │   ├── API_DOCS.md                   # 80 个 API 接口文档
 │   └── DESIGN_ARCHITECTURE.md        # 架构设计文档
 │
-├── my_video_platform-web/            # 用户端 API（Spring Boot, port 7071）
-│   └── src/main/java/com/myvideoplatform/web/controller/
+├── echoplay-web/            # 用户端 API（Spring Boot, port 7071）
+│   └── src/main/java/com/echoplay/web/controller/
 │
-├── my_video_platform-admin/          # 管理端 API（Spring Boot, port 7070）
-│   └── src/main/java/com/myvideoplatform/admin/controller/
+├── echoplay-admin/          # 管理端 API（Spring Boot, port 7070）
+│   └── src/main/java/com/echoplay/admin/controller/
 │
-├── my_video_platform-common/         # 共享模块
+├── echoplay-common/         # 共享模块
 │   ├── entity/                       # PO/DTO/VO/枚举
 │   ├── mappers/                      # MyBatis Mapper
 │   ├── service/                      # 业务逻辑
@@ -242,7 +242,7 @@ EchoPlay/
 
 ## 设计文档
 
-详细架构设计文档：[DESIGN_ARCHITECTURE.md](./My_video_platform_front/DESIGN_ARCHITECTURE.md)
+详细架构设计文档：[DESIGN_ARCHITECTURE.md](./echoplay-front/DESIGN_ARCHITECTURE.md)
 
 涵盖：
 - 系统架构分层设计
@@ -256,7 +256,7 @@ EchoPlay/
 
 ## API 文档
 
-完整 API 接口文档：[API_DOCS.md](./My_video_platform_front/API_DOCS.md)
+完整 API 接口文档：[API_DOCS.md](./echoplay-front/API_DOCS.md)
 
 - **80 个 API 接口**，14 个业务模块
 - 前后端实现状态标注

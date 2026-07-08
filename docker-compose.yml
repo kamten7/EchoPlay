@@ -4,11 +4,11 @@ services:
   # ==================== MySQL 8.0 ====================
   mysql:
     image: mysql:8.0
-    container_name: mvp-mysql
+    container_name: echoplay-mysql
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: my_video_platform
+      MYSQL_DATABASE: echoplay
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     ports:
@@ -30,12 +30,12 @@ services:
       retries: 5
       start_period: 30s
     networks:
-      - mvp-network
+      - echoplay-network
 
   # ==================== Redis ====================
   redis:
     image: redis:7-alpine
-    container_name: mvp-redis
+    container_name: echoplay-redis
     restart: always
     command: redis-server --requirepass ${REDIS_PASSWORD} --maxmemory 512mb --maxmemory-policy allkeys-lru
     ports:
@@ -49,12 +49,12 @@ services:
       retries: 5
       start_period: 5s
     networks:
-      - mvp-network
+      - echoplay-network
 
   # ==================== MinIO（对象存储）====================
   minio:
     image: minio/minio:latest
-    container_name: mvp-minio
+    container_name: echoplay-minio
     restart: always
     environment:
       MINIO_ROOT_USER: ${MINIO_ROOT_USER}
@@ -72,32 +72,32 @@ services:
       retries: 3
       start_period: 10s
     networks:
-      - mvp-network
+      - echoplay-network
 
   # ==================== MinIO 初始化桶和策略 ====================
   minio-init:
     image: minio/mc:latest
-    container_name: mvp-minio-init
+    container_name: echoplay-minio-init
     depends_on:
       minio:
         condition: service_healthy
     restart: "no"
     entrypoint: >
       /bin/sh -c "
-      /usr/bin/mc alias set mvp http://minio:9000 ${MINIO_ROOT_USER} ${MINIO_ROOT_PASSWORD};
-      /usr/bin/mc mb --ignore-existing mvp/my_video_platform;
-      /usr/bin/mc anonymous set download mvp/my_video_platform;
+      /usr/bin/mc alias set echoplay http://minio:9000 ${MINIO_ROOT_USER} ${MINIO_ROOT_PASSWORD};
+      /usr/bin/mc mb --ignore-existing echoplay/echoplay;
+      /usr/bin/mc anonymous set download echoplay/echoplay;
       exit 0;
       "
     networks:
-      - mvp-network
+      - echoplay-network
 
-  # ==================== 用户端 API（my_video_platform-web）====================
-  my_video_platform-web:
+  # ==================== 用户端 API（echoplay-web）====================
+  echoplay-web:
     build:
       context: .
-      dockerfile: my_video_platform-web/Dockerfile
-    container_name: mvp-web
+      dockerfile: echoplay-web/Dockerfile
+    container_name: echoplay-web
     restart: always
     ports:
       - "7071:7071"
@@ -130,7 +130,7 @@ services:
       LOG_LEVEL: ${LOG_LEVEL:-info}
     volumes:
       # 文件存储目录（Windows 宿主机映射）
-      - ${WINDOWS_PROJECT_DIR:-D:/webser/my_video_platform}:/app/data
+      - ${WINDOWS_PROJECT_DIR:-D:/webser/echoplay}:/app/data
       # 日志输出
       - ./logs/web:/app/logs
     depends_on:
@@ -141,14 +141,14 @@ services:
       minio:
         condition: service_healthy
     networks:
-      - mvp-network
+      - echoplay-network
 
-  # ==================== 管理端 API（my_video_platform-admin）====================
-  my_video_platform-admin:
+  # ==================== 管理端 API（echoplay-admin）====================
+  echoplay-admin:
     build:
       context: .
-      dockerfile: my_video_platform-admin/Dockerfile
-    container_name: mvp-admin
+      dockerfile: echoplay-admin/Dockerfile
+    container_name: echoplay-admin
     restart: always
     ports:
       - "7070:7070"
@@ -183,7 +183,7 @@ services:
       LOG_LEVEL: ${LOG_LEVEL:-info}
     volumes:
       # 文件存储目录（Windows 宿主机映射）
-      - ${WINDOWS_PROJECT_DIR:-D:/webser/my_video_platform}:/app/data
+      - ${WINDOWS_PROJECT_DIR:-D:/webser/echoplay}:/app/data
       # 日志输出
       - ./logs/admin:/app/logs
     depends_on:
@@ -194,7 +194,7 @@ services:
       minio:
         condition: service_healthy
     networks:
-      - mvp-network
+      - echoplay-network
 
 volumes:
   mysql_data:
@@ -205,5 +205,5 @@ volumes:
     driver: local
 
 networks:
-  mvp-network:
+  echoplay-network:
     driver: bridge

@@ -32,7 +32,7 @@ public class ScheduleConfig {
     @Scheduled(cron = "0 0 3 * * ?")
     public void cleanTempFiles() {
         logger.info("开始清理临时文件...");
-        File uploadDir = new File(System.getProperty("java.io.tmpdir"), "my_video_platform/upload");
+        File uploadDir = new File(System.getProperty("java.io.tmpdir"), "echoplay/upload");
         if (uploadDir.exists() && uploadDir.isDirectory()) {
             File[] uploadDirs = uploadDir.listFiles();
             if (uploadDirs != null) {

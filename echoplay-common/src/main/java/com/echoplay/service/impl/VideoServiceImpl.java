@@ -443,7 +443,7 @@ public class VideoServiceImpl implements VideoService {
             }
         }
 
-        String tempDir = System.getProperty("java.io.tmpdir") + "/my_video_platform/cover/";
+        String tempDir = System.getProperty("java.io.tmpdir") + "/echoplay/cover/";
         new File(tempDir).mkdirs();
         String outputPath = tempDir + fileId + ".png";
 

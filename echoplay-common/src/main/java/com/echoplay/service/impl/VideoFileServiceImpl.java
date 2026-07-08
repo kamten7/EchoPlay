@@ -47,7 +47,7 @@ public class VideoFileServiceImpl implements VideoFileService {
     private Appconfig appconfig;
 
     // Temporary folder for chunk uploads
-    private static final String TEMP_FOLDER = System.getProperty("java.io.tmpdir") + "/my_video_platform/upload/";
+    private static final String TEMP_FOLDER = System.getProperty("java.io.tmpdir") + "/echoplay/upload/";
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -198,7 +198,7 @@ public class VideoFileServiceImpl implements VideoFileService {
         cleanupChunkDir(tempDir);
 
         // Extract video cover from first frame
-        String tempCoverDir = System.getProperty("java.io.tmpdir") + "/my_video_platform/cover/";
+        String tempCoverDir = System.getProperty("java.io.tmpdir") + "/echoplay/cover/";
         new File(tempCoverDir).mkdirs();
         String coverPath = tempCoverDir + fileId + ".png";
         boolean frameOk = FFmpegUtils.extractFrame(permanentFile.getAbsolutePath(), coverPath, "00:00:01");

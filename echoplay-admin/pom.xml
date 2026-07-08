@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.echoplay</groupId>
-        <artifactId>my_video_platform</artifactId>
+        <artifactId>echoplay</artifactId>
         <version>1.0</version>
     </parent>
     <groupId>com.echoplay</groupId>
-    <artifactId>my_video_platform-web</artifactId>
+    <artifactId>echoplay-admin</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
 
@@ -23,19 +23,24 @@
     <dependencies>
         <dependency>
             <groupId>com.echoplay</groupId>
-            <artifactId>my_video_platform-common</artifactId>
+            <artifactId>echoplay-common</artifactId>
             <version>1.0</version>
         </dependency>
-        <!-- Nashorn 脚本引擎支持(Java 15+需要) -->
+
+        <!-- Nashorn JS引擎，用于验证码算术表达式计算 -->
         <dependency>
             <groupId>org.openjdk.nashorn</groupId>
             <artifactId>nashorn-core</artifactId>
-            <version>15.4</version>
         </dependency>
 
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
 
     </dependencies>
@@ -45,7 +50,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.echoplay.web.MyVideoPlatformWebRunApplication</mainClass>
+                    <mainClass>com.echoplay.admin.MyVideoPlatformAdminRunApplication</mainClass>
                 </configuration>
             </plugin>
         </plugins>
